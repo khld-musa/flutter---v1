@@ -12,14 +12,32 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String bottonName = "click me";
-  int currentIndex = 0;
+
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
+      home: const page1(),
+    );
+  }
+}
+
+
+class page1 extends StatefulWidget {
+  const page1({super.key});
+
+  @override
+  State<page1> createState() => _page1State();
+}
+
+class _page1State extends State<page1> {
+  String bottonName = "click me";
+  int currentIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
         appBar: AppBar(
           title: const Text("khaid"),
         ),
@@ -34,26 +52,14 @@ class _MyAppState extends State<MyApp> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            onPrimary: Colors.red, primary: Colors.orange),
                         onPressed: () {
-                          setState(
-                            () {
-                              bottonName = "clicked";
-                            },
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (BuildContext context) => page2(),
+                            ),
                           );
                         },
-                        child: Text(bottonName),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          setState(
-                            () {
-                              bottonName = "clicked";
-                            },
-                          );
-                        },
-                        child: Text(bottonName),
+                        child: const Text("next page"),
                       )
                     ],
                   ),
@@ -78,6 +84,18 @@ class _MyAppState extends State<MyApp> {
             });
           },
         ),
+      );
+  }
+}
+
+class page2 extends StatelessWidget {
+  const page2({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("next page"),
       ),
     );
   }
